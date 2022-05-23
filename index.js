@@ -12,7 +12,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/../client/public"));
 app.use(bodyParser.json({limit: '50mb'}));
 
+const SPRoutes =require('./routes/SPRouter')
 
+app.use("/api/sp", SPRoutes);
+
+const db = require('./database-mysql')
 
 
 
