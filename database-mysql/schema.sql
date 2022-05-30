@@ -74,6 +74,20 @@ CREATE TABLE IF NOT EXISTS `weddo`.`sp` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
+----------------------------------------------
+------Table 'salle'
+-------------------------------------------
+CREATE TABLE IF NOT EXISTS `weddo`.`salle` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NULL DEFAULT NULL,
+   `price` VARCHAR(255) NULL DEFAULT NULL,
+  `latitude` VARCHAR(255) NULL DEFAULT NULL,
+  `longitude` VARCHAR(255) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 -- Table `weddo`.`chosenservices`
 -- -----------------------------------------------------
