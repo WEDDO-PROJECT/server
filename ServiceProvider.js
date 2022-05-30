@@ -1,10 +1,10 @@
-const db = require('./index.js')
+const db = require('./database-mysql/index')
 
 module.exports={
 
     AddUser: function(event,callback){
         const sql ="INSERT INTO sp SET ?"
-        db.query(sql,event,function (error,results) {
+        db.query(sql,[event],function (error,results) {
              callback(error,results) 
           })
     },

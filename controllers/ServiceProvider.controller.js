@@ -1,7 +1,7 @@
-const {AddUser,selectLastUser}=require('../database-mysql/ServiceProvider.js')
-const ServiceProvider =require('../database-mysql/ServiceProvider.js') ;
+const {AddUser,selectLastUser}=require('../ServiceProvider.js')
+const ServiceProvider =require('../ServiceProvider.js') ;
 const bcrypt = require("bcrypt")
-   
+   const db=require("../database-mysql/index")
 
     
 module.exports = { 
@@ -26,6 +26,7 @@ module.exports = {
 
 
 Register: async function(req,res){
+  
   console.log(req.body)
   const password = req.body.password;
   const saltRounds=bcrypt.genSaltSync(10)
@@ -55,9 +56,34 @@ Register: async function(req,res){
       
       }
   })
+},
+
+login : function (req, res, next)  {
+
+  var params = {
+      email: req.body.email,
+      password: req.body.password
+  }
+  sql = 'SELECT * FROM sp WHERE email =?'
+  db.query(sql, [req.body.email], (err, result) => { // user does not exists
+      if (err) {
+          res.send(err);
+      } else {
+          if (!result.length) {
+              res.send("Email or password is incorrect!");
+          } else {
+              bcrypt.compare(params.password, result[0]["password"], (bErr, bResult) => { // wrong password
+                      if (bResult) {
+                          res.send(result[0]);
+                      } else {
+                          res.send("Email or password is incorrect!");
+                      }
+              })
+          }
+      }
+
+  });
 }
-
-
 
 
 //   Register :function (req, res) {
