@@ -18,7 +18,7 @@ const SPRoutes =require('./routes/SPRouter')
 
 app.use("/api/sp", SPRoutes);
 
-const db = require('./database-mysql')
+
 
 
 
