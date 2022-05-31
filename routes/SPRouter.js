@@ -6,4 +6,6 @@ router.post('/AuthWithPhone',controller.AuthWithPhone);
 router.post('/Register',controller.Register)
 router.post('/addSalle',controllerSalle.AddSalle)
 router.get('/SelectSalle',controllerSalle.SelectSalle)
+router.get('/all',controller.selectAll)
+router.get('/AllServiceProvider',controller.selectAllSPRoom)
 module.exports = router;
