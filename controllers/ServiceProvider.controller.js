@@ -1,9 +1,7 @@
 const {AddUser,selectLastUser}=require('../ServiceProvider.js')
 const ServiceProvider =require('../ServiceProvider.js') ;
 const bcrypt = require("bcrypt")
-   const db=require("../database-mysql/index")
-
-    
+   const db=require("../database-mysql/index")  
 module.exports = { 
    AuthWithPhone :(req,res)=>{
     const accountSid = "ACb943fb1dce70e11a65c5003f1eba8721";
@@ -33,11 +31,13 @@ Register: async function(req,res){
   const encryptedPassword = await bcrypt.hash(password, saltRounds)
   //console.log(encryptedPassword)
   req.body.password=encryptedPassword
-  AddUser(req.body,(err,results)=>{
+  console.log(req.body)
+  const sql ="INSERT INTO sp SET ?"
+  db.query(sql,req.body,(err,results)=>{
     if (err){
       res.send({
         "code":400,
-        "failed":"error ocurred"
+        err:err
       })
     }
     else {
@@ -83,6 +83,19 @@ login : function (req, res, next)  {
       }
 
   });
+
+    },
+  
+
+  //get all SP for showing in home (from slim)
+  selectAll:(req,res)=>{
+    var sql='select * from sp'
+    db.query(sql,function (err,result) {
+      if(err)res.send(err)
+      if(result)res.send(result)
+    })
+  }
+  
 }
 
 
@@ -98,29 +111,6 @@ login : function (req, res, next)  {
 //         }
 //     })
 // },
-};
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //   app.post("/login", function (req, res) {
     //     const email = req.body.email;

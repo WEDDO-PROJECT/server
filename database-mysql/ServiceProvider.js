@@ -1,4 +1,4 @@
-const db = require('./database-mysql/index')
+const db = require('./index.js')
 
 module.exports={
 
