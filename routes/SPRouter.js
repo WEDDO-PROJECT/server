@@ -4,6 +4,7 @@ const router = require('express').Router();
 
 router.post('/AuthWithPhone',controller.AuthWithPhone);
 router.post('/Register',controller.Register)
+router.post('/login',controller.login)
 router.post('/addSalle',controllerSalle.AddSalle)
 router.get('/SelectSalle',controllerSalle.SelectSalle)
 router.get('/all',controller.selectAll)
