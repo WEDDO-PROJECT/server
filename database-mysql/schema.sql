@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `weddo`.`user` (
   `name` VARCHAR(255) NULL DEFAULT NULL,
   `email` VARCHAR(255) NULL DEFAULT NULL,
   `password` VARCHAR(255) NULL DEFAULT NULL,
-    `confirme_Password` VARCHAR(255) NULL DEFAULT NULL,
+  `confirme_Password` VARCHAR(255) NULL DEFAULT NULL,
   `tel_number` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
@@ -71,7 +71,23 @@ CREATE TABLE IF NOT EXISTS `weddo`.`sp` (
   `description` VARCHAR(255) NULL DEFAULT NULL,
   `status` VARCHAR(25) NULL DEFAULT NULL,
   `availability` VARCHAR(255) NULL DEFAULT NULL,
+
+
   PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+----------------------------------------------
+------Table 'salle'
+-------------------------------------------
+CREATE TABLE IF NOT EXISTS `weddo`.`salle` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NULL DEFAULT NULL,
+   `price` VARCHAR(255) NULL DEFAULT NULL,
+  `latitude` VARCHAR(255) NULL DEFAULT NULL,
+  `longitude` VARCHAR(255) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
