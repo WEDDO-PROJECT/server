@@ -88,12 +88,12 @@ login : function (req, res, next)  {
     },
     getSpInfo :function (req, res){ // const id=req.params.id
       console.log(req.params.id)
-      const userInfo =`SELECT * FROM sp WHERE id= ${req.params[`id`]}` ;
+      const userInfo =`SELECT * FROM sp WHERE id= ${req.params[`id`]}` 
     
           db.query(userInfo, (err, data) => {
               if (err) {
                   res.send(err);
-                  console.log(err)
+                  console.log(err);
               } else {
                   res.send(data);
               }
