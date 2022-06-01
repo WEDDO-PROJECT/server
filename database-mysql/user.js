@@ -32,14 +32,14 @@ module.exports={
 
      getAllEmails: function (email, callback) {
         const sql = "SELECT * FROM  user WHERE email = ? ";
-        connection.query(sql, [email], (err, result) => {
+        db.query(sql, [email], (err, result) => {
           callback(err, result);
         });
       },
 
       getPasswordByEmail: (email, callback) => {
         const sql = "SELECT password FROM user WHERE email = ?;";
-        connection.query(sql, [email], (err, result) => {
+        db.query(sql, [email], (err, result) => {
           callback(err, result);
         });
       },
