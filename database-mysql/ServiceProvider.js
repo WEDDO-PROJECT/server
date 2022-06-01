@@ -15,4 +15,11 @@ module.exports={
             callback(err,result)
         });
       },
+
+      selectUserSP: function(callback){
+          const sql="SELECT * FROM sp";
+          db.query(sql,function (err,result){
+              callback(err,result)
+          })
+      }
 }
