@@ -1,4 +1,4 @@
-const {AddUser,selectLastUser,selectUserSP}=require('../database-mysql/ServiceProvider.js')
+const {AddUser,selectLastUser,selectUserSP,getAllEmails}=require('../database-mysql/ServiceProvider.js')
 const ServiceProvider =require('../database-mysql/ServiceProvider.js') ;
 const bcrypt = require("bcrypt")
 const db = require('../database-mysql/')
@@ -83,9 +83,43 @@ Register: async function(req,res){
               });
            }
     });
-  }
+  },
 
-
+  login:async function (req, res) {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res.send("Please fill all the fields");
+    } else {
+      getAllEmails(email, (err, results) => {
+        if (err) {
+          return res.status(200).send(err);
+        }
+       else if (results.length  === 0) {
+          return res.send("email not found");
+        } else {
+          try {
+            bcrypt.compare(
+              password,
+              results[0].password,
+              function (err, result) {
+                if (err) {
+                  res.send(err);
+                }
+                if (result === false) {
+                  res.send("login failed");
+                }
+                if (result === true) {
+                  res.send(results[0])
+                }
+              }
+            );
+          } catch (err) {
+            res.send(err);
+          }
+        }
+      });
+    }
+  },
 
 }
 
