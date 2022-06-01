@@ -12,6 +12,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema weddo
 -- -----------------------------------------------------
+DROP DATABASE IF EXISTS `weddo`;
 CREATE SCHEMA IF NOT EXISTS `weddo` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
 USE `weddo` ;
 -- -----------------------------------------------------
@@ -71,6 +72,7 @@ CREATE TABLE IF NOT EXISTS `weddo`.`sp` (
   `description` VARCHAR(255) NULL DEFAULT NULL,
   `status` VARCHAR(25) NULL DEFAULT NULL,
   `availability` VARCHAR(255) NULL DEFAULT NULL,
+  `pack_price` VARCHAR(255) NULL DEFAULT NULL,
 
 
   PRIMARY KEY (`id`))
