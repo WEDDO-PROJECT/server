@@ -21,5 +21,20 @@ module.exports={
           db.query(sql,function (err,result){
               callback(err,result)
           })
-      }
+      },
+
+      
+     getAllEmails: function (email, callback) {
+        const sql = "SELECT * FROM  sp WHERE email = ? ";
+        db.query(sql, [email], (err, result) => {
+          callback(err, result);
+        });
+      },
+
+      getPasswordByEmail: (email, callback) => {
+        const sql = "SELECT password FROM sp WHERE email = ?;";
+        db.query(sql, [email], (err, result) => {
+          callback(err, result);
+        });
+      },
 }
