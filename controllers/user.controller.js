@@ -1,4 +1,4 @@
-const {AddUser,selectLastUser,selectUserSP,getAllEmails}=require('../database-mysql/user.js')
+const {AddUser,selectLastUser,selectUserSP,getAllEmails,login}=require('../database-mysql/user.js')
 const user =require('../database-mysql/user') ;
 const bcrypt = require("bcrypt")
 const db = require('../database-mysql/')
@@ -39,26 +39,26 @@ module.exports={
         
         }
       })},
-    //  SignIn :async function(req,res){
+     SignIn :async function(req,res){
       
-    // const password = req.body.password;
-    // const saltRounds=bcrypt.genSaltSync(10)
-    // const encryptedPassword = await bcrypt.hash(password, saltRounds) 
-    // req.body.password=encryptedPassword
-    // login((err, result) => {
-    //   if (err) {
-    //     console.log(err)
-    //   }
-    //   else {
-    //     console.log(result)
-    //     res.send({
-    //       result,
-    //       "code":200,
-    //       "success":"user login sucessfully"
-    //         });
-    //   }
-    // })
-    //  }
+    const password = req.body.password;
+    const saltRounds=bcrypt.genSaltSync(10)
+    const encryptedPassword = await bcrypt.hash(password, saltRounds) 
+    req.body.password=encryptedPassword
+    login((err, result) => {
+      if (err) {
+        console.log(err)
+      }
+      else {
+        console.log(result)
+        res.send({
+          result,
+          "code":200,
+          "success":"user login sucessfully"
+            });
+      }
+    })
+     }
 
 
 

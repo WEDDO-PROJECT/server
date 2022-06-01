@@ -23,12 +23,12 @@ module.exports={
           })
       },
 
-    //   login :function (user,callback){
-    //     const sql= "SELECT * FROM user WHERE email = ? OR password = ?";
-    //     db.query(sql, [user.name,user.password],function (err,result){
-    //         callback(err,result)
-    //     });
-    //   }
+      login :function (user,callback){
+        const sql= "SELECT * FROM user WHERE email = ? OR password = ?";
+        db.query(sql, [user.name,user.password],function (err,result){
+            callback(err,result)
+        });
+      },
 
      getAllEmails: function (email, callback) {
         const sql = "SELECT * FROM  user WHERE email = ? ";
