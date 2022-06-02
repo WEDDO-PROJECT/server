@@ -1,10 +1,9 @@
 const express = require("express");
-var db = require("./database-mysql/index.js");
-
 const bodyParser = require("body-parser");
-
+const SPRoutes =require('./routes/SPRouter')
+const userRoutes= require('./routes/user.routes')
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT =  3000;
 const cors = require("cors");
 
 app.use(cors());
@@ -14,9 +13,10 @@ app.use(express.static(__dirname + "/../client/public"));
 
 app.use(bodyParser.json({limit: '50mb'}));
 
-const SPRoutes =require('./routes/SPRouter')
 
 app.use("/api/sp", SPRoutes);
+
+app.use("/api/user", userRoutes);
 
 
 
@@ -84,6 +84,7 @@ db.query(sql3,[email],(err,res)=>{
   }
 })
 })
+
 
 app.listen(PORT, function () {
   console.log("listening on port 3000!");

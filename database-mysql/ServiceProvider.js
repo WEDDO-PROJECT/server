@@ -4,7 +4,7 @@ module.exports={
 
     AddUser: function(event,callback){
         const sql ="INSERT INTO sp SET ?"
-        db.query(sql,event,function (error,results) {
+        db.query(sql,[event],function (error,results) {
              callback(error,results) 
           })
     },
@@ -15,4 +15,11 @@ module.exports={
             callback(err,result)
         });
       },
+
+      selectUserSP: function(callback){
+          const sql="SELECT * FROM sp";
+          db.query(sql,function (err,result){
+              callback(err,result)
+          })
+      }
 }

@@ -1,9 +1,7 @@
-const {AddUser,selectLastUser}=require('../database-mysql/ServiceProvider.js')
+const {AddUser,selectLastUser,selectUserSP}=require('../database-mysql/ServiceProvider.js')
 const ServiceProvider =require('../database-mysql/ServiceProvider.js') ;
 const bcrypt = require("bcrypt")
-   
-
-    
+   const db=require("../database-mysql/index")  
 module.exports = { 
    AuthWithPhone :(req,res)=>{
     const accountSid = "ACb943fb1dce70e11a65c5003f1eba8721";
@@ -26,17 +24,21 @@ module.exports = {
 
 
 Register: async function(req,res){
+  
   console.log(req.body)
+  //console.log(req.body)
   const password = req.body.password;
   const saltRounds=bcrypt.genSaltSync(10)
   const encryptedPassword = await bcrypt.hash(password, saltRounds)
   //console.log(encryptedPassword)
   req.body.password=encryptedPassword
-  AddUser(req.body,(err,results)=>{
+ // console.log(req.body)
+  const sql ="INSERT INTO sp SET ?"
+  db.query(sql,req.body,(err,results)=>{
     if (err){
       res.send({
         "code":400,
-        "failed":"error ocurred"
+        err:err
       })
     }
     else {
@@ -55,8 +57,61 @@ Register: async function(req,res){
       
       }
   })
-}
+},
 
+login : function (req, res, next)  {
+
+  var params = {
+      email: req.body.email,
+      password: req.body.password
+  }
+  sql = 'SELECT * FROM sp WHERE email =?'
+  db.query(sql, [req.body.email], (err, result) => { // user does not exists
+      if (err) {
+          res.send(err);
+      } else {
+          if (!result.length) {
+              res.send("Email or password is incorrect!");
+          } else {
+              bcrypt.compare(params.password, result[0]["password"], (bErr, bResult) => { // wrong password
+                      if (bResult) {
+                          res.send(result[0]);
+                      } else {
+                          res.send("Email or password is incorrect!");
+                      }
+              })
+          }
+      }
+
+  });
+
+    },
+    getSpInfo :function (req, res){ // const id=req.params.id
+      console.log(req.params.id)
+      const userInfo =`SELECT * FROM sp WHERE id= ${req.params[`id`]}` 
+    
+          db.query(userInfo, (err, data) => {
+              if (err) {
+                  res.send(err);
+                  console.log(err);
+              } else {
+                  res.send(data);
+              }
+          });
+        }
+      }
+  
+    
+
+  //get all SP for showing in home (from slim)
+  selectAll:(req,res)=>{
+    var sql='select * from sp'
+    db.query(sql,function (err,result) {
+      if(err)res.send(err)
+      if(result)res.send(result)
+    })
+  }
+  
 
 
 
@@ -72,29 +127,6 @@ Register: async function(req,res){
 //         }
 //     })
 // },
-};
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //   app.post("/login", function (req, res) {
     //     const email = req.body.email;
@@ -125,37 +157,32 @@ Register: async function(req,res){
 
 
 
+
+  // selectAllSPRoom : async function(req,res){
+  //   selectUserSP((err, result) => {
+  //       if (err) {
+  //          console.log(err)
+  //         }
+  //        else {
+  //         res.send({
+  //           result,
+  //           "code":200,
+  //           "success":"select all sucessfully"
+  //             });
+  //          }
+  //   });
+  // }
+
+
+
+
+
+
+
+ 
+
+
+
     
 
-    // const Register  =(req, res) =>{
-    //     const email = req.body.email;
-    //     const name = req.body.name;
-    //     const password = req.body.password;
-    //    // const confirme_Password = req.body.confirme_Password;
-    //     const tel_number = req.body.tel_number;
-    //     const cin =req.body.cin;
-    //     const status="pending";
-    //     const description=req.body.description
-      
-    //     const checkE = "SELECT `email` FROM weddo.`SP` where `email` = ?;";
-    //     db.query(checkE, [email], (err, result) => {
-    //       if (err) {
-    //         res.send({ err: err });
-    //       } else {
-    //         if (result.length > 0) {
-    //           res.send({
-    //             message: "User already have an accout assigned to this Email!!!",
-    //           });
-    //         } else {
-    //           db.query(sql, [name, email, password,cin, tel_number,status,description], (err, result) => {
-    //             if (err) {
-    //               console.log("user is not added!!!");
-    //             } else {
-    //               res.send(result);
-    //               console.log("Registered successfully !!!");
-    //             }
-    //           });
-    //         }
-    //       }
-    //     });
-    //   }
+  
