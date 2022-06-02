@@ -12,6 +12,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema weddo
 -- -----------------------------------------------------
+DROP DATABASE IF EXISTS `weddo`;
 CREATE SCHEMA IF NOT EXISTS `weddo` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
 USE `weddo` ;
 -- -----------------------------------------------------
@@ -33,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `weddo`.`user` (
   `name` VARCHAR(255) NULL DEFAULT NULL,
   `email` VARCHAR(255) NULL DEFAULT NULL,
   `password` VARCHAR(255) NULL DEFAULT NULL,
-    `confirme_Password` VARCHAR(255) NULL DEFAULT NULL,
+  `confirme_Password` VARCHAR(255) NULL DEFAULT NULL,
   `tel_number` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
@@ -71,9 +72,24 @@ CREATE TABLE IF NOT EXISTS `weddo`.`sp` (
   `description` VARCHAR(255) NULL DEFAULT NULL,
   `status` VARCHAR(25) NULL DEFAULT NULL,
   `availability` VARCHAR(255) NULL DEFAULT NULL,
+  `pack_price` VARCHAR(255) NULL DEFAULT NULL,
 
 
   PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+----------------------------------------------
+------Table 'salle'
+-------------------------------------------
+CREATE TABLE IF NOT EXISTS `weddo`.`salle` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NULL DEFAULT NULL,
+   `price` VARCHAR(255) NULL DEFAULT NULL,
+  `latitude` VARCHAR(255) NULL DEFAULT NULL,
+  `longitude` VARCHAR(255) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -96,6 +112,31 @@ CREATE TABLE IF NOT EXISTS `weddo`.`chosenservices` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `weddo`.`user_has_chosenservices`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `weddo`.`user_has_chosenservices` (
+  `user_id` INT NOT NULL,
+  `chosenservices_id` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`user_id`, `chosenservices_id`),
+  INDEX `fk_user_has_chosenservices_chosenservices1_idx` (`chosenservices_id` ASC) VISIBLE,
+  INDEX `fk_user_has_chosenservices_user1_idx` (`user_id` ASC) VISIBLE,
+  CONSTRAINT `fk_user_has_chosenservices_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `weddo`.`user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_user_has_chosenservices_chosenservices1`
+    FOREIGN KEY (`chosenservices_id`)
+    REFERENCES `weddo`.`chosenservices` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 -- Table `weddo`.`comments`
 -- -----------------------------------------------------
@@ -204,28 +245,4 @@ CREATE TABLE IF NOT EXISTS `weddo`.`rating` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
--- -----------------------------------------------------
--- Table `weddo`.`user_has_chosenservices`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `weddo`.`user_has_chosenservices` (
-  `user_id` INT NOT NULL,
-  `chosenservices_id` INT UNSIGNED NOT NULL,
-  PRIMARY KEY (`user_id`, `chosenservices_id`),
-  INDEX `fk_user_has_chosenservices_chosenservices1_idx` (`chosenservices_id` ASC) VISIBLE,
-  INDEX `fk_user_has_chosenservices_user1_idx` (`user_id` ASC) VISIBLE,
-  CONSTRAINT `fk_user_has_chosenservices_user1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `weddo`.`user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_user_has_chosenservices_chosenservices1`
-    FOREIGN KEY (`chosenservices_id`)
-    REFERENCES `weddo`.`chosenservices` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
