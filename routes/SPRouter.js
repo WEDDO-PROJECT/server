@@ -1,4 +1,4 @@
-const controller =require('../controllers/ServiceProvider.controller')
+const controller =require('../controllers/ServiceProvider.controller.js')
 const controllerSalle =require('../controllers/SalleController.js')
 const router = require('express').Router();
 
