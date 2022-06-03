@@ -75,6 +75,13 @@ CREATE TABLE IF NOT EXISTS `weddo`.`sp` (
   `status` VARCHAR(25) NULL DEFAULT NULL,
   `availability` VARCHAR(255) NULL DEFAULT NULL,
 
+  `name` VARCHAR(255) NULL DEFAULT NULL,
+  `pack_price` VARCHAR(255) NULL DEFAULT NULL,
+  `latitude` VARCHAR(255) NULL DEFAULT NULL,
+  `longitude` VARCHAR(255) NULL DEFAULT NULL,
+
+  `pack_price` VARCHAR(255) NULL DEFAULT NULL,
+
 
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
@@ -89,6 +96,19 @@ CREATE TABLE IF NOT EXISTS `weddo`.`salle` (
    `price` VARCHAR(255) NULL DEFAULT NULL,
   `latitude` VARCHAR(255) NULL DEFAULT NULL,
   `longitude` VARCHAR(255) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+----------------------------------------------
+------Table 'image'
+-------------------------------------------
+CREATE TABLE IF NOT EXISTS `weddo`.`image` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `uri` VARCHAR(255) NULL DEFAULT NULL,
+  `idSalle` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 )
 ENGINE = InnoDB
@@ -113,6 +133,31 @@ CREATE TABLE IF NOT EXISTS `weddo`.`chosenservices` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
+-- -----------------------------------------------------
+-- Table `weddo`.`user_has_chosenservices`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `weddo`.`user_has_chosenservices` (
+  `user_id` INT NOT NULL,
+  `chosenservices_id` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`user_id`, `chosenservices_id`),
+  INDEX `fk_user_has_chosenservices_chosenservices1_idx` (`chosenservices_id` ASC) VISIBLE,
+  INDEX `fk_user_has_chosenservices_user1_idx` (`user_id` ASC) VISIBLE,
+  CONSTRAINT `fk_user_has_chosenservices_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `weddo`.`user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_user_has_chosenservices_chosenservices1`
+    FOREIGN KEY (`chosenservices_id`)
+    REFERENCES `weddo`.`chosenservices` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 -- Table `weddo`.`comments`
 -- -----------------------------------------------------
@@ -141,11 +186,7 @@ CREATE TABLE IF NOT EXISTS `weddo`.`media` (
   `sp_id` INT NULL DEFAULT NULL,
   `image` VARCHAR(255) NULL DEFAULT NULL,
   `video` VARCHAR(255) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `sp_id` (`sp_id` ASC) VISIBLE,
-  CONSTRAINT `images_ibfk_1`
-    FOREIGN KEY (`sp_id`)
-    REFERENCES `weddo`.`sp` (`id`))
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -221,28 +262,4 @@ CREATE TABLE IF NOT EXISTS `weddo`.`rating` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
--- -----------------------------------------------------
--- Table `weddo`.`user_has_chosenservices`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `weddo`.`user_has_chosenservices` (
-  `user_id` INT NOT NULL,
-  `chosenservices_id` INT UNSIGNED NOT NULL,
-  PRIMARY KEY (`user_id`, `chosenservices_id`),
-  INDEX `fk_user_has_chosenservices_chosenservices1_idx` (`chosenservices_id` ASC) VISIBLE,
-  INDEX `fk_user_has_chosenservices_user1_idx` (`user_id` ASC) VISIBLE,
-  CONSTRAINT `fk_user_has_chosenservices_user1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `weddo`.`user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_user_has_chosenservices_chosenservices1`
-    FOREIGN KEY (`chosenservices_id`)
-    REFERENCES `weddo`.`chosenservices` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+

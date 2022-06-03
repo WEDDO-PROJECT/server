@@ -20,9 +20,12 @@ app.use("/api/checkList",checklistRoutes)
 app.use("/api/sp", SPRoutes);
 app.use("/api/user", userRoutes);
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> a8579b5e1a6495217180b89445c3f2bc1fd2a1ee
 app.listen(PORT, function () {
   console.log("listening on port 3000!");
 });
