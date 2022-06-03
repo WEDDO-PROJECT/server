@@ -17,8 +17,6 @@ app.use(bodyParser.json({limit: '50mb'}));
 app.use("/api/sp", SPRoutes);
 app.use("/api/user", userRoutes);
 
-// const db = require('./database-mysql')
-
 app.listen(PORT, function () {
   console.log("listening on port 3000!");
 });
