@@ -44,6 +44,7 @@ module.exports={
 
 
     login:async function (req, res) {
+      console.log('login')
       const { email, password } = req.body;
       if (!email || !password) {
         return res.send(["Please fill all the fields"]);
