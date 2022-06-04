@@ -116,10 +116,14 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- Table `weddo`.`chosenservices`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `weddo`.`chosenservices` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `user_id` INT NULL DEFAULT NULL,
-  `sp_id` INT NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
+  
+  `user_id` INT NOT NULL ,
+  `sp_id` INT NOT NULL ,
+  `date` VARCHAR(255) NULL DEFAULT NULL,
+  `confirme` int NULL DEFAULT NULL,
+
+  PRIMARY KEY (`user_id`,`sp_id`),
+  
   INDEX `user_id` (`user_id` ASC) VISIBLE,
   INDEX `sp_id` (`sp_id` ASC) VISIBLE,
   CONSTRAINT `chosenservices_ibfk_1`

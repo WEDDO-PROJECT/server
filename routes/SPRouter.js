@@ -13,4 +13,5 @@ router.get('/getimages/:id',controllerImage.selectImage)
 router.get('/SelectSalle',controllerSalle.SelectSalle)
 router.get('/all',controller.selectAll)
 router.get('/AllServiceProvider',controller.selectAllSPRoom)
+router.get('/info/:id',controller.selectOne)
 module.exports = router;
