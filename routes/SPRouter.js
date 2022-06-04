@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-const controller =require('../controllers/ServiceProvider.controller.js')
-=======
 const controller =require('../controllers/ServiceProvider.controller')
 
 const controllerImage =require('../controllers/ImageController')
->>>>>>> a8579b5e1a6495217180b89445c3f2bc1fd2a1ee
 const controllerSalle =require('../controllers/SalleController.js')
 const router = require('express').Router();
 
@@ -17,4 +13,5 @@ router.get('/getimages/:id',controllerImage.selectImage)
 router.get('/SelectSalle',controllerSalle.SelectSalle)
 router.get('/all',controller.selectAll)
 router.get('/AllServiceProvider',controller.selectAllSPRoom)
+router.get('/info/:id',controller.selectOne)
 module.exports = router;

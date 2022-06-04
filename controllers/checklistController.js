@@ -1,18 +1,16 @@
 const db = require("../database-mysql/");
 
-var selectTasksByIdUser = function (req, res) {
-  db.query(
-    "SELECT * FROM check_list where user_id=? ",
-    [req.params.id],
-    (err, items, fields) => {
-      if (err) {
-        res.status(500).send(err);
-      } else {
-        res.status(200).send(items);
-      }
-    }
-  );
-};
+
+const selectTasksByIdUser=(req,res)=>{
+  var id = req.body.id;
+  console.log(id);
+  sql='select * from check_list where user_id=?'
+  db.query(sql,id,(err, results)=>{
+    if (err)res.send(err);
+    if (results)res.send(results);
+  })
+
+}
 
 const deleteTask = (req, res) => {
   const id = req.params.id;

@@ -47,14 +47,14 @@ module.exports={
       console.log('login')
       const { email, password } = req.body;
       if (!email || !password) {
-        return res.send("Please fill all the fields");
+        return res.send(["Please fill all the fields"]);
       } else {
         getAllEmails(email, (err, results) => {
           if (err) {
-            return res.status(200).send(err);
+            return res.status(200).send([err]);
           }
          else if (results.length  === 0) {
-            return res.send("email not found");
+            return res.send(["email not found"]);
           } else {
             try {
               bcrypt.compare(
@@ -62,13 +62,13 @@ module.exports={
                 results[0].password,
                 function (err, result) {
                   if (err) {
-                    res.send(err);
+                    res.send(['err',err]);
                   }
                   if (result === false) {
-                    res.send("login failed");
+                    res.send(["login failed"]);
                   }
                   if (result === true) {
-                    res.send(results[0])
+                    res.send(['success',results[0]])
                   }
                 }
               );
