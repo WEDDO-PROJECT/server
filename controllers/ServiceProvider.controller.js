@@ -120,7 +120,15 @@ Register: async function(req,res){
       });
     }
   },
+  selectOne:(req,res)=>{
+    var id = req.params.id;
+    sql='select * from sp where id=?'
+    db.query(sql,id,(err, results)=>{
+      if (err)res.send(err);
+      if (results)res.send(results);
+    })
 
+  }
 }
 
 
