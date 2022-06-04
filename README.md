@@ -1,1 +1,3 @@
 # server
+pull
+push
