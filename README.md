@@ -1,2 +1,3 @@
 # server
 pull
+push
