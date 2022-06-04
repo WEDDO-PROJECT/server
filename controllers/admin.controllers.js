@@ -1,8 +1,14 @@
 var db = require("../database-mysql");
+
 // const bcrypt = require("bcrypt")
 
 var selectAllsp = function (req, res) {
     db.query("SELECT owner_name FROM weddo.sp", (err, items, fields) => {
+
+
+var selectAllsp = function (req, res) {
+    db.query("SELECT owner_name FROM sp.owner_name", (err, items, fields) => {
+
       if (err) {
         res.status(500).send(err);
       } else {
@@ -10,6 +16,7 @@ var selectAllsp = function (req, res) {
       }
     });
   };
+
 
 //   var adminSignUp = async (req, res) => {
 //     console.log(req.body);
@@ -38,6 +45,7 @@ var selectAllsp = function (req, res) {
 //     })
 // }
 
+
 var adminSignIn=(req,res)=>{
     const email=req.body.email
 const password=req.body.password
@@ -53,6 +61,7 @@ db.query(sqlSel,[email,password],(err,result)=>{
     }
 })
 }
+
 // var adminSignIn = (req, res) => {
 //     const email = req.body.email
 //     const password = req.body.password
@@ -91,6 +100,9 @@ db.query(sqlSel,[email,password],(err,result)=>{
 
 module.exports = { 
     // adminSignUp,
+
+module.exports = { 
+
     adminSignIn,
     selectAllsp
  };

@@ -1,4 +1,5 @@
 const express = require("express");
+
 const bodyParser = require("body-parser");
 const SPRoutes =require('./routes/SPRouter')
 const userRoutes= require('./routes/user.routes')
@@ -14,6 +15,28 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/../client/public"));
+
+const adminRoutes = require('./routes/admin.router')
+const bodyParser= require('body-parser')
+
+const app = express();
+const PORT = 3000
+const cors = require('cors');
+var admins = require('./database-mysql');
+
+app.use(cors({origin:'*'}))
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(__dirname + "/../client/public"));
+app.use(bodyParser.json({limit: '50mb'}));
+app.use("/api/admins", adminRoutes);
+ 
+
+
+
+
+
+
 
 // app.use(bodyParser.json({limit: '50mb'}));
 
