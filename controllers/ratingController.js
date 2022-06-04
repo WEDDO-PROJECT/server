@@ -1,8 +1,8 @@
 var db = require("../database-mysql");
 
-const createRequest=(req,res)=>{
+const createRating=(req,res)=>{
 
-const sql ="INSERT INTO chosenservices SET ?"
+const sql ="INSERT INTO rating SET ?"
     db.query(sql,req.body,(err,result)=>{
     if(err){
         res.send(err)
@@ -30,10 +30,5 @@ const getRequestByIdUser=(req,res)=>{
             if(result){res.send(result)}
         })
     }
-    const getAll=(req,res)=>{
-        db.query('select * from chosenservices',(err,result)=>{
-            if(err){res.send(err)}
-            if(result){res.send(result)}
-        })
-    }
-module.exports={createRequest,getRequestByIdUser,deleteRequest,getAll}
+
+module.exports={createRating,getRequestByIdUser,deleteRequest}
