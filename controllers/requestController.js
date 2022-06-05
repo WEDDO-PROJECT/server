@@ -22,4 +22,18 @@ const getRequestByIdUser=(req,res)=>{
         
     })
     }
-module.exports={createRequest,getRequestByIdUser}
+    const deleteRequest=(req,res)=>{
+        var sql ='delete from chosenservices where user_id=? and sp_id=?'
+        console.log(req.body);
+        db.query(sql,[req.body.user_id,req.body.sp_id],(err,result)=>{
+            if(err){res.send(err)}
+            if(result){res.send(result)}
+        })
+    }
+    const getAll=(req,res)=>{
+        db.query('select * from chosenservices',(err,result)=>{
+            if(err){res.send(err)}
+            if(result){res.send(result)}
+        })
+    }
+module.exports={createRequest,getRequestByIdUser,deleteRequest,getAll}
