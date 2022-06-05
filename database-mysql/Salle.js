@@ -17,7 +17,7 @@ module.exports={
       },
  
       selectSalle: function (callback) {
-        const sql= "SELECT * FROM salle ";
+        const sql= "SELECT * FROM salle LIMIT 10";
         db.query(sql, function (err,result){
             callback(err,result)
         });

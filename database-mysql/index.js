@@ -1,5 +1,5 @@
 var mysql = require('mysql2');
-var myPassword = require('./env');
+var myPassword = require('./env.js');
 
 
 
