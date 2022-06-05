@@ -248,13 +248,12 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 -- Table `weddo`.`rating`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `weddo`.`rating` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `user_id` INT NULL DEFAULT NULL,
-  `sp_id` INT NULL DEFAULT NULL,
+CREATE TABLE IF NOT EXISTS `weddo`.`rating` (  
+  `user_id` INT NOT NULL ,
+  `sp_id` INT NOT NULL ,
   `reviewText` VARCHAR(255) NULL DEFAULT NULL,
   `rating` VARCHAR(255) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`sp_id`,`user_id`),
   INDEX `user_id` (`user_id` ASC) VISIBLE,
   INDEX `sp_id` (`sp_id` ASC) VISIBLE,
   CONSTRAINT `rating_ibfk_1`
