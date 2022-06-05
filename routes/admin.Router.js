@@ -1,7 +1,7 @@
 const router = require('express').Router();
-const adminController = require("../controllers/checklist.js");
+const adminController = require("../controllers/admin.controllers");
 
-router.post("/", checklist.)
-router.get("/", checklist.)
-// router.post("/", checklist.)
+router.post("/signin", adminController.adminSignIn)
+router.get("/dashboard", adminController.selectAllsp)
+// router.post("/signup", adminController.adminSignUp)
 module.exports = router;
