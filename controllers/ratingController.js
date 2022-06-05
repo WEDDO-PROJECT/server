@@ -11,10 +11,10 @@ const sql ="INSERT INTO rating SET ?"
     
 })
 }
-const getRequestByIdUser=(req,res)=>{
+const getAllRating=(req,res)=>{
 
-    const sql ="select * from sp s inner join chosenservices c on c.sp_id=s.id  where c.user_id=? "
-        db.query(sql,[req.params.id],(err,result)=>{
+    const sql ="select * from rating "
+        db.query(sql,(err,result)=>{
         if(err){
             res.send(err)
         }
@@ -22,13 +22,6 @@ const getRequestByIdUser=(req,res)=>{
         
     })
     }
-    const deleteRequest=(req,res)=>{
-        var sql ='delete from chosenservices where user_id=? and sp_id=?'
-        console.log(req.body);
-        db.query(sql,[req.body.user_id,req.body.sp_id],(err,result)=>{
-            if(err){res.send(err)}
-            if(result){res.send(result)}
-        })
-    }
+    
 
-module.exports={createRating,getRequestByIdUser,deleteRequest}
+module.exports={createRating,getAllRating}

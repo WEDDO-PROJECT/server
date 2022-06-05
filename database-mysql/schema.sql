@@ -46,15 +46,17 @@ COLLATE = utf8mb4_0900_ai_ci;
 CREATE TABLE IF NOT EXISTS `weddo`.`check_list` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `user_id` INT NULL DEFAULT NULL,
-  `todos` VARCHAR(255) NULL DEFAULT NULL,
+  `todo` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   INDEX `user_id` (`user_id` ASC) VISIBLE,
   CONSTRAINT `check_list_ibfk_1`
     FOREIGN KEY (`user_id`)
-    REFERENCES `weddo`.`user` (`id`))
+    REFERENCES `weddo`.`user` (`id`)
+      )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
+
 -- -----------------------------------------------------
 -- Table `weddo`.`sp`
 -- -----------------------------------------------------
@@ -72,6 +74,12 @@ CREATE TABLE IF NOT EXISTS `weddo`.`sp` (
   `description` VARCHAR(255) NULL DEFAULT NULL,
   `status` VARCHAR(25) NULL DEFAULT NULL,
   `availability` VARCHAR(255) NULL DEFAULT NULL,
+
+  `name` VARCHAR(255) NULL DEFAULT NULL,
+  `pack_price` VARCHAR(255) NULL DEFAULT NULL,
+  `latitude` VARCHAR(255) NULL DEFAULT NULL,
+  `longitude` VARCHAR(255) NULL DEFAULT NULL,
+
   `pack_price` VARCHAR(255) NULL DEFAULT NULL,
 
 
@@ -88,6 +96,19 @@ CREATE TABLE IF NOT EXISTS `weddo`.`salle` (
    `price` VARCHAR(255) NULL DEFAULT NULL,
   `latitude` VARCHAR(255) NULL DEFAULT NULL,
   `longitude` VARCHAR(255) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+----------------------------------------------
+------Table 'image'
+-------------------------------------------
+CREATE TABLE IF NOT EXISTS `weddo`.`image` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `uri` VARCHAR(255) NULL DEFAULT NULL,
+  `idSalle` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 )
 ENGINE = InnoDB
@@ -169,11 +190,7 @@ CREATE TABLE IF NOT EXISTS `weddo`.`media` (
   `sp_id` INT NULL DEFAULT NULL,
   `image` VARCHAR(255) NULL DEFAULT NULL,
   `video` VARCHAR(255) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `sp_id` (`sp_id` ASC) VISIBLE,
-  CONSTRAINT `images_ibfk_1`
-    FOREIGN KEY (`sp_id`)
-    REFERENCES `weddo`.`sp` (`id`))
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;

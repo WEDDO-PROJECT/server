@@ -3,6 +3,7 @@ const router = require('express').Router();
 
 
 router.post('/create',controller.createRating)
+router.get('/getAll',controller.getAllRating)
 // router.get('/getByIdUser/:id',controller.getRequestByIdUser)
 // router.post('/delete',controller.deleteRequest)
 
