@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `weddo`.`sp` (
   `latitude` VARCHAR(255) NULL DEFAULT NULL,
   `longitude` VARCHAR(255) NULL DEFAULT NULL,
 
-  `pack_price` VARCHAR(255) NULL DEFAULT NULL,
+  `pack_title` VARCHAR(255) NULL DEFAULT NULL,
 
 
   PRIMARY KEY (`id`))
