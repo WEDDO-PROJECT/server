@@ -1,11 +1,4 @@
 var db = require("../database-mysql");
-
-// const bcrypt = require("bcrypt")
-
-var selectAllsp = function (req, res) {
-    db.query("SELECT owner_name FROM weddo.sp", (err, items, fields) => {
-
-
 var selectAllsp = function (req, res) {
     db.query("SELECT owner_name FROM sp.owner_name", (err, items, fields) => {
 
@@ -98,11 +91,6 @@ db.query(sqlSel,[email,password],(err,result)=>{
 //     })
 // }
 
-module.exports = { 
-    // adminSignUp,
 
-module.exports = { 
 
-    adminSignIn,
-    selectAllsp
- };
+module.exports = { adminSignIn,selectAllsp };
