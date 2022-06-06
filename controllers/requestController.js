@@ -36,4 +36,12 @@ const getRequestByIdUser=(req,res)=>{
             if(result){res.send(result)}
         })
     }
-module.exports={createRequest,getRequestByIdUser,deleteRequest,getAll}
+    const getAllByIdSp=(req,res)=>{
+        var x=req.body.id;
+        console.log(x);
+        db.query(`select * from chosenservices where sp_id=${x}`,(err,result)=>{
+            if(err){res.send(err)}
+            if(result){res.send(result)}
+        })
+    }
+module.exports={createRequest,getRequestByIdUser,deleteRequest,getAll,getAllByIdSp}
