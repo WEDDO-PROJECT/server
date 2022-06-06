@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `weddo`.`admin` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(255) NULL DEFAULT NULL,
   `password` VARCHAR(255) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`id`));
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `weddo`.`user` (
   `password` VARCHAR(255) NULL DEFAULT NULL,
   `confirme_Password` VARCHAR(255) NULL DEFAULT NULL,
   `tel_number` VARCHAR(255) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`id`));
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `weddo`.`check_list` (
   CONSTRAINT `check_list_ibfk_1`
     FOREIGN KEY (`user_id`)
     REFERENCES `weddo`.`user` (`id`)
-      )
+      );
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -74,29 +74,27 @@ CREATE TABLE IF NOT EXISTS `weddo`.`sp` (
   `description` VARCHAR(255) NULL DEFAULT NULL,
   `status` VARCHAR(25) NULL DEFAULT NULL,
   `availability` VARCHAR(255) NULL DEFAULT NULL,
-
   `name` VARCHAR(255) NULL DEFAULT NULL,
-  `pack_price` VARCHAR(255) NULL DEFAULT NULL,
   `latitude` VARCHAR(255) NULL DEFAULT NULL,
   `longitude` VARCHAR(255) NULL DEFAULT NULL,
-
   `pack_price` VARCHAR(255) NULL DEFAULT NULL,
+  `pack_title` VARCHAR(255) NULL DEFAULT NULL,
 
 
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`id`));
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 ----------------------------------------------
-------Table 'salle'
--------------------------------------------
+------Table 'salle'---------------------------
+----------------------------------------------
 CREATE TABLE IF NOT EXISTS `weddo`.`salle` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NULL DEFAULT NULL,
    `price` VARCHAR(255) NULL DEFAULT NULL,
   `latitude` VARCHAR(255) NULL DEFAULT NULL,
   `longitude` VARCHAR(255) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`);
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
@@ -109,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `weddo`.`image` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `uri` VARCHAR(255) NULL DEFAULT NULL,
   `idSalle` VARCHAR(255) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`);
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
@@ -133,7 +131,7 @@ CREATE TABLE IF NOT EXISTS `weddo`.`chosenservices` (
     REFERENCES `weddo`.`user` (`id`),
   CONSTRAINT `chosenservices_ibfk_2`
     FOREIGN KEY (`sp_id`)
-    REFERENCES `weddo`.`sp` (`id`))
+    REFERENCES `weddo`.`sp` (`id`));
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -155,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `weddo`.`user_has_chosenservices` (
     FOREIGN KEY (`chosenservices_id`)
     REFERENCES `weddo`.`chosenservices` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION);
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -178,7 +176,7 @@ CREATE TABLE IF NOT EXISTS `weddo`.`comments` (
     REFERENCES `weddo`.`user` (`id`),
   CONSTRAINT `comments_ibfk_2`
     FOREIGN KEY (`sp_id`)
-    REFERENCES `weddo`.`sp` (`id`))
+    REFERENCES `weddo`.`sp` (`id`));
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -190,7 +188,7 @@ CREATE TABLE IF NOT EXISTS `weddo`.`media` (
   `sp_id` INT NULL DEFAULT NULL,
   `image` VARCHAR(255) NULL DEFAULT NULL,
   `video` VARCHAR(255) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`id`));
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -201,7 +199,7 @@ CREATE TABLE IF NOT EXISTS `weddo`.`room` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NULL DEFAULT NULL,
   `type` TINYINT(1) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`id`));
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -225,7 +223,7 @@ CREATE TABLE IF NOT EXISTS `weddo`.`participants` (
     REFERENCES `weddo`.`sp` (`id`),
   CONSTRAINT `participants_ibfk_3`
     FOREIGN KEY (`room_id`)
-    REFERENCES `weddo`.`room` (`id`))
+    REFERENCES `weddo`.`room` (`id`));
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -241,7 +239,7 @@ CREATE TABLE IF NOT EXISTS `weddo`.`message` (
   INDEX `participant_id` (`participant_id` ASC) VISIBLE,
   CONSTRAINT `message_ibfk_1`
     FOREIGN KEY (`participant_id`)
-    REFERENCES `weddo`.`participants` (`id`))
+    REFERENCES `weddo`.`participants` (`id`));
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -261,7 +259,7 @@ CREATE TABLE IF NOT EXISTS `weddo`.`rating` (
     REFERENCES `weddo`.`user` (`id`),
   CONSTRAINT `rating_ibfk_2`
     FOREIGN KEY (`sp_id`)
-    REFERENCES `weddo`.`sp` (`id`))
+    REFERENCES `weddo`.`sp` (`id`));
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;

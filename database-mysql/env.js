@@ -1,5 +1,5 @@
 module.exports = {
-    myPassword: "Hackmeslim1998",
+    myPassword: "passe1999",
 
 
     CLOUDINARY_CLOUD_NAME : "pentagon",
