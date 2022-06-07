@@ -1,4 +1,4 @@
-const {AddUser,selectLastUser,selectUserSP,getAllEmails}=require('../database-mysql/ServiceProvider.js')
+const {AddUser,selectLastUser,selectUserSP,getAllEmails, updatePriceSP , getSp,updateMapSP}=require('../database-mysql/ServiceProvider.js')
 const ServiceProvider =require('../database-mysql/ServiceProvider.js') ;
 const bcrypt = require("bcrypt")
 const db = require('../database-mysql/')
@@ -119,6 +119,90 @@ Register: async function(req,res){
         }
       });
     }
+  },
+  updatePrice:async function (req, res) {
+    const { id, pack_price } = req.body; 
+    if (!id || !pack_price) {
+      return res.send("Please fill all the fields");
+    } else {
+      console.log(id, pack_price)
+      updatePriceSP(id,pack_price, (err, results) => {
+        if (err) {
+          console.log(err)
+          return res.status(200).send(err);
+        } else {
+          res.send(results);
+          console.log(results)
+        }
+      });
+    }
+  },
+  updateSalle:async function (req, res) {
+    const {id,  price,name ,longitude ,latitude } = req.body; 
+    if (!name || !price) {
+      return res.send("Please fill all the fields");
+    } else {
+      console.log(price,name ,longitude ,latitude,id)
+      updateMapSP(id,price,name ,longitude ,latitude, (err, results) => {
+        if (err) {
+          console.log(err)
+          return res.status(200).send(err);
+        } else {
+          getSp(id , (err, result) => {
+            if (err) {  
+              console.log(err)
+            }
+            else {
+              res.send({
+                result,
+                "code":200,
+                "success":"salle registered sucessfully"
+                  });
+            }
+          })
+        }
+      });
+    }
+  },
+  createRating:(req,res)=>{
+
+    const sql ="INSERT INTO rating SET ?"
+        db.query(sql,req.body,(err,result)=>{
+        if(err){
+            res.send(err)
+        }
+        if(result){res.send(result)}
+        
+    })
+    },
+    createRequest:(req,res)=>{
+
+      const sql ="INSERT INTO chosenservices SET ?"
+          db.query(sql,req.body,(err,result)=>{
+          if(err){
+              res.send(err)
+          }
+          if(result){res.send(result)}
+          
+      })
+      },
+      getAll:(req,res)=>{
+        const sql ="select * from sp s inner join chosenservices c on c.sp_id=s.id  where c.user_id=109 "
+        db.query(sql,(err,result)=>{
+        if(err){
+            res.send(err)
+        }
+        if(result){res.send(result)}
+        
+    })
+    },
+    deleteRequest:(req,res)=>{
+      var sql ='delete from chosenservices where user_id=? and sp_id=?'
+      console.log(req.body);
+      db.query(sql,[req.body.user_id,req.body.sp_id],(err,result)=>{
+          if(err){res.send(err)}
+          if(result){res.send(result)}
+      })
   },
   selectOne:(req,res)=>{
     var id = req.params.id;

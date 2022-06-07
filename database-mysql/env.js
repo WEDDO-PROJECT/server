@@ -5,6 +5,4 @@ module.exports = {
     CLOUDINARY_API_key : "941657449646847",
     CLOUDINARY_API_SECRET : "ObUg5NMDETrA3cqTEapjq4LD1AE",
 
-    myPassword: "Hackmeslim1998",
-
 }

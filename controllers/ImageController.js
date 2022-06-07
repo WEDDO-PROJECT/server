@@ -37,14 +37,14 @@ module.exports = {
         })
 },
 selectImage :async function(req,res){
-  const id = req.params.id
+  const id = req.params['id']
   console.log(id)
   selectImage(id, (err, result) => {
         if (err) {
           console.log(err)
         }
         else {
-          console.log(result)
+          console.log("gchjklmlkjhgfvh" + result)
           res.send({
             result,
             "code":200,
