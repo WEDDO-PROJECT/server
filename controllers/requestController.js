@@ -23,9 +23,9 @@ const getRequestByIdUser=(req,res)=>{
     })
     }
     const deleteRequest=(req,res)=>{
-        var sql ='delete from chosenservices where user_id=? and sp_id=?'
+        var sql ='delete from chosenservices where user_id=? and sp_id=? and date=?'
         console.log(req.body);
-        db.query(sql,[req.body.user_id,req.body.sp_id],(err,result)=>{
+        db.query(sql,[req.body.user_id,req.body.sp_id,req.body.date],(err,result)=>{
             if(err){res.send(err)}
             if(result){res.send(result)}
         })
@@ -36,4 +36,20 @@ const getRequestByIdUser=(req,res)=>{
             if(result){res.send(result)}
         })
     }
-module.exports={createRequest,getRequestByIdUser,deleteRequest,getAll}
+    const getAllByIdSp=(req,res)=>{
+        var x=req.body.id;
+        console.log(x);
+        db.query(`select * from chosenservices where sp_id=${x}`,(err,result)=>{
+            if(err){res.send(err)}
+            if(result){res.send(result)}
+        })
+    }
+    const updateConfime=(req,res)=>{
+        var x=req.body;
+        console.log(x);
+        db.query(`update chosenservices set confirme=1 where sp_id=${x.sp_id} and user_id=${x.user_id} and date='${x.date}'`,(err,result)=>{
+            if(err){res.send(err)}
+            if(result){res.send('result')}
+        })
+    }
+module.exports={createRequest,getRequestByIdUser,deleteRequest,getAll,getAllByIdSp,updateConfime}

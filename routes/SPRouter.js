@@ -14,4 +14,6 @@ router.get('/SelectSalle',controllerSalle.SelectSalle)
 router.get('/all',controller.selectAll)
 router.get('/AllServiceProvider',controller.selectAllSPRoom)
 router.get('/info/:id',controller.selectOne)
+router.post('/update',controller.update)
+router.post('/updateMap',controller.updateMap)
 module.exports = router;
