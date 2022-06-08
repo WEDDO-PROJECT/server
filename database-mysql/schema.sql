@@ -77,11 +77,8 @@ CREATE TABLE IF NOT EXISTS `weddo`.`sp` (
   `name` VARCHAR(255) NULL DEFAULT NULL,
   `latitude` VARCHAR(255) NULL DEFAULT NULL,
   `longitude` VARCHAR(255) NULL DEFAULT NULL,
-<<<<<<< HEAD
 
-=======
   `pack_price` VARCHAR(255) NULL DEFAULT NULL,
->>>>>>> e348756747de2ea327e8690ba824c8ddafc35fab
   `pack_title` VARCHAR(255) NULL DEFAULT NULL,
 
 
@@ -123,10 +120,10 @@ CREATE TABLE IF NOT EXISTS `weddo`.`chosenservices` (
   
   `user_id` INT NOT NULL ,
   `sp_id` INT NOT NULL ,
-  `date` VARCHAR(255) NULL DEFAULT NULL,
+  `date` VARCHAR(255) NOT NULL ,
   `confirme` int NULL DEFAULT NULL,
 
-  PRIMARY KEY (`user_id`,`sp_id`),
+  PRIMARY KEY (`user_id`,`sp_id`,`date`),
   
   INDEX `user_id` (`user_id` ASC) VISIBLE,
   INDEX `sp_id` (`sp_id` ASC) VISIBLE,
