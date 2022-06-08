@@ -44,7 +44,7 @@ selectImage :async function(req,res){
           console.log(err)
         }
         else {
-          console.log(result)
+          console.log(result,'empty')
           res.send({
             result,
             "code":200,

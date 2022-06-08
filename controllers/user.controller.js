@@ -79,6 +79,13 @@ module.exports={
         });
       }
     },
+    oneUser: function (req,res) {
+      console.log(req.body);
+      db.query(`select * from user where id=${req.body.id}`,(err, result)=>{
+        if (err) {res.send(err)}
+        if(result){res.send(result)}
+      })
+    }
 
 }
 

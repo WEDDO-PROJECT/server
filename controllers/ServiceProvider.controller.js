@@ -128,6 +128,30 @@ Register: async function(req,res){
       if (results)res.send(results);
     })
 
+  },
+  update:(req,res)=>{
+    var x=req.body
+    var id=x.id;
+    var pr=x.professional_name
+    var email=x.email
+    var des=x.description
+    var tel=x.tel
+    var pack=x.pack_price
+    var img=x.image
+    db.query(`update sp set professional_name='${pr}',email='${email}',description='${des}',tel='${tel}',pack_price='${pack}',logo='${img}' where id=${id}`,(err, result)=>{
+      if (err)res.send(err)
+      if(result)res.send(result)
+    })
+  },
+  updateMap:(req,res)=>{
+    var latitude=req.body.latitude
+    var longitude=req.body.longitude
+    var id=req.body.id
+    const sql="UPDATE sp SET   sp.latitude = ?, sp.longitude = ? WHERE sp.id = ?";
+          db.query(sql,[latitude,longitude ,id ], (err,result)=>{
+              if (err)res.send(err)
+              if(result)res.send(result)
+  })
   }
 }
 
